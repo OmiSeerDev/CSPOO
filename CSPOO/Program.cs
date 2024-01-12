@@ -35,11 +35,11 @@ internal class Program {
         }
 
         public void catList() {
-
+            string res = "";
             foreach (var el in Category) {
-                Console.Write($"|{el}");
+                res += $"{Convert.ToString(el)}, ";
             }
-
+            Console.Write(res.Substring(0, res.Length - 2)); //Removes the last comma and space
         }
 
         public void getInfo() {
@@ -47,19 +47,19 @@ internal class Program {
                 $"Name: {ProductName}\n" +
                 $"Presentation: {Grams}{Unit} {Presentation}\n"
                 );
-            Console.Write("\nCategory: ");
+            Console.Write("Category: [");
             catList();
             Console.Write(
-                $"Price: {Convert.ToDouble(Price).ToString("C")}\n" +
+                $"]\nPrice: {Price.ToString("C")}\n" +
                 $"Description: {Description}");
         }
     }
 
 
 
-    private static void Main(string[] args) {
+    private static void Main() {
         Categories[] cats = { Categories.Analgesics, Categories.Antipyrethics };
-        Product paracetamol = new Product("Paracetamol", "TABLeTs", 500, "mg", cats, 700, $"Efectivo contra el dolor leve y la fiebre.");
+        Product paracetamol = new("Paracetamol", "TABLeTs", 500, "mg", cats, 700, $"Efectivo contra el dolor leve y la fiebre.");
         paracetamol.getInfo();
     }
 
