@@ -1,22 +1,20 @@
 ﻿using System;
 
-internal class Program
-{
+internal class Program {
 
-    enum Categories
-    {
+    enum Categories {
         Undefined,
         Analgesics,
         Antibiotics,
         Antidiabetics,
         Antihypertensives,
+        Antipyrethics,
         Materials
     }
 
-    class Product
-    {
+    class Product {
         string ProductName;
-        Categories Category;
+        List<Categories> Category = new List<Categories>();
         string Presentation;
         int Price;
         string Description;
@@ -24,31 +22,44 @@ internal class Program
         string Unit;
         public static string Legend = " Consulte a su médico";
 
-        public Product(string productName, string presentation, int grams, string unit, Categories category, int price, string description)
-        {
+        public Product(string productName, string presentation, int grams, string unit, Categories[] category, int price, string description) {
             ProductName = productName;
             Grams = grams;
             Unit = unit;
             Presentation = presentation.ToLower();
-            Category = category;
             Price = price / 100;
             Description = string.Concat(description, Legend);
+            foreach (var element in category) {
+                Category.Add(element);
+            }
         }
 
+        public void catList() {
 
-        public void getInfo()
-        {
-            Console.WriteLine(
-                $"Name: {ProductName}\nPresentation: {Grams}{Unit} {Presentation}\nCategory: {Category}\nPrice: {Convert.ToDouble(Price).ToString("C")}\nDescription: {Description}\n"
+            foreach (var el in Category) {
+                Console.Write($"|{el}");
+            }
+
+        }
+
+        public void getInfo() {
+            Console.Write(
+                $"Name: {ProductName}\n" +
+                $"Presentation: {Grams}{Unit} {Presentation}\n"
                 );
+            Console.Write("\nCategory: ");
+            catList();
+            Console.Write(
+                $"Price: {Convert.ToDouble(Price).ToString("C")}\n" +
+                $"Description: {Description}");
         }
     }
 
 
 
-    private static void Main(string[] args)
-    {
-        Product paracetamol = new Product("Paracetamol", "TABLeTs", 500, "mg", Categories.Analgesics, 700, $"Efectivo contra el dolor leve y la fiebre.");
+    private static void Main(string[] args) {
+        Categories[] cats = { Categories.Analgesics, Categories.Antipyrethics };
+        Product paracetamol = new Product("Paracetamol", "TABLeTs", 500, "mg", cats, 700, $"Efectivo contra el dolor leve y la fiebre.");
         paracetamol.getInfo();
     }
 
