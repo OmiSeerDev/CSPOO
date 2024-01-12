@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text;
 
 internal class Program {
 
@@ -35,11 +35,11 @@ internal class Program {
         }
 
         public void catList() {
-            string res = "";
+            StringBuilder res = new();
             foreach (var el in Category) {
-                res += $"{Convert.ToString(el)}, ";
+                res.Append($"{Convert.ToString(el)}, ");
             }
-            Console.Write(res.Substring(0, res.Length - 2)); //Removes the last comma and space
+            Console.Write(res.ToString().Substring(0, res.Length - 2)); //Removes the last comma and space
         }
 
         public void getInfo() {
