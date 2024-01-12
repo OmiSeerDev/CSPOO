@@ -27,21 +27,15 @@ internal class Program {
             Unit = unit;
             Presentation = presentation.ToLower();
             Category = category;
-            Price = price;
+            Price = price/100;
             Description = String.Concat(description, Legend);
         }
 
-        string getProductName() {
-            return ProductName;
-        }
-        string getDescription() {
-            return Description;
-        }
-        int getPrice() {
-            return Price / 100;
-        }
+ 
         public void getInfo() {
-            Console.WriteLine($"Name: {ProductName}\nPresentation: {Grams}{Unit} {Presentation}\nCategory: {Category}\nPrice: {Price}\nDescription: {Description}\n");
+            Console.WriteLine(
+                $"Name: {ProductName}\nPresentation: {Grams}{Unit} {Presentation}\nCategory: {Category}\nPrice: {Convert.ToDouble(Price).ToString("C")}\nDescription: {Description}\n"
+                );
         }
     }
 
@@ -51,5 +45,5 @@ internal class Program {
         Product paracetamol = new Product("Paracetamol", "TABLeTs", 500, "mg", Categories.Analgesics, 700, $"Efectivo contra el dolor leve y la fiebre.");
         paracetamol.getInfo();
     }
-    
+
 }
