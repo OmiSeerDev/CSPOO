@@ -32,7 +32,7 @@ internal class Program
             Presentation = presentation.ToLower();
             Category = category;
             Price = price / 100;
-            Description = String.Concat(description, Legend);
+            Description = string.Concat(description, Legend);
         }
 
 
