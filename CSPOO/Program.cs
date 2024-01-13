@@ -68,7 +68,7 @@ internal class Program
 
     private static void Main()
     {
-        Categories[] cats = { (Categories)1, (Categories)5 };
+        Categories[] cats = { (Categories)1, Categories.Antipyrethics };
         Product paracetamol = new("Paracetamol", "TABLeTs", 500, "mg", cats, 1400, $"Efectivo contra el dolor leve y la fiebre.");
         paracetamol.getInfo();
     }
