@@ -1,8 +1,10 @@
 ﻿using System.Text;
 
-internal class Program {
+internal class Program
+{
 
-    enum Categories {
+    enum Categories
+    {
         Undefined,
         Analgesics,
         Antibiotics,
@@ -12,7 +14,8 @@ internal class Program {
         Materials
     }
 
-    class Product {
+    class Product
+    {
         string ProductName;
         List<Categories> Category = new List<Categories>();
         string Presentation;
@@ -22,44 +25,51 @@ internal class Program {
         string Unit;
         public static string Legend = " Consulte a su médico";
 
-        public Product(string productName, string presentation, int grams, string unit, Categories[] category, int price, string description) {
+        public Product(string productName, string presentation, int grams, string unit, Categories[] category, int price, string description)
+        {
             ProductName = productName;
             Grams = grams;
             Unit = unit;
             Presentation = presentation.ToLower();
             Price = price / 100;
             Description = string.Concat(description, Legend);
-            foreach (var element in category) {
+            foreach (var element in category)
+            {
                 Category.Add(element);
             }
         }
 
-        public void catList() {
-            StringBuilder res = new();
-            foreach (var el in Category) {
-                res.Append($"{Convert.ToString(el)}, ");
+        public string CatList
+        {
+            get
+            {
+                StringBuilder res = new();
+                foreach (var el in Category)
+                {
+                    res.Append($"{Convert.ToString(el)}, ");
+                }
+                return res.ToString().Substring(0, res.Length - 2); //Removes the last comma and space
             }
-            Console.Write(res.ToString().Substring(0, res.Length - 2)); //Removes the last comma and space
         }
 
-        public void getInfo() {
-            Console.Write(
+        public void getInfo()
+        {
+            Console.WriteLine(
                 $"Name: {ProductName}\n" +
-                $"Presentation: {Grams}{Unit} {Presentation}\n"
-                );
-            Console.Write("Category: [");
-            catList();
+                $"Presentation: {Grams}{Unit} {Presentation}\n" +
+                $"Category: [{CatList}]");
             Console.Write(
-                $"]\nPrice: {Price.ToString("C")}\n" +
+                $"Price: {Price.ToString("C")}\n" +
                 $"Description: {Description}");
         }
     }
 
 
 
-    private static void Main() {
-        Categories[] cats = { Categories.Analgesics, Categories.Antipyrethics };
-        Product paracetamol = new("Paracetamol", "TABLeTs", 500, "mg", cats, 700, $"Efectivo contra el dolor leve y la fiebre.");
+    private static void Main()
+    {
+        Categories[] cats = { (Categories)1, (Categories)5 };
+        Product paracetamol = new("Paracetamol", "TABLeTs", 500, "mg", cats, 1400, $"Efectivo contra el dolor leve y la fiebre.");
         paracetamol.getInfo();
     }
 
